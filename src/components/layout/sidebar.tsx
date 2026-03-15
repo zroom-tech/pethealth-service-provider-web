@@ -1,0 +1,53 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { LogOut, PawPrint } from "lucide-react";
+import { NAV_ITEMS } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+import { logout } from "@/app/login/actions";
+
+export function Sidebar() {
+  const pathname = usePathname();
+
+  return (
+    <aside className="hidden md:flex md:w-60 md:flex-col md:fixed md:inset-y-0 border-r bg-background">
+      <div className="flex h-14 items-center gap-2 border-b px-4">
+        <PawPrint className="size-5 text-primary" />
+        <span className="font-semibold text-sm">키니로그 파트너스</span>
+      </div>
+      <nav className="flex-1 space-y-1 p-2">
+        {NAV_ITEMS.map((item) => {
+          const isActive =
+            item.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(item.href);
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                isActive
+                  ? "bg-accent text-accent-foreground"
+                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+              )}
+            >
+              <item.icon className="size-4" />
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
+      <div className="border-t p-2">
+        <button
+          onClick={() => logout()}
+          className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+        >
+          <LogOut className="size-4" />
+          로그아웃
+        </button>
+      </div>
+    </aside>
+  );
+}
