@@ -23,6 +23,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { CheckCircle2, PawPrint, XCircle } from "lucide-react";
+import { CATEGORIES } from "@/lib/constants";
 
 export default function LoginPage() {
   const [loginState, loginAction, loginPending] = useActionState(login, null);
@@ -209,9 +210,11 @@ export default function LoginPage() {
                         <SelectValue placeholder="업종을 선택하세요" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="hospital">동물병원</SelectItem>
-                        <SelectItem value="grooming">미용샵</SelectItem>
-                        <SelectItem value="hotel">호텔</SelectItem>
+                        {CATEGORIES.map((cat) => (
+                          <SelectItem key={cat.value} value={cat.value}>
+                            {cat.label}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>

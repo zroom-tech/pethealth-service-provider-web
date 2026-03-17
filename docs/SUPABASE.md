@@ -41,6 +41,12 @@
 | `claim_mail(p_user_id, p_mail_ids)` | 메일 보상 일괄 수령 | points/gems/exp/items 지원, 만료 체크 |
 | `migrate_local_stats(p_user_id, p_exp, p_points, p_gems)` | 로컬 재화 → 서버 마이그레이션 (1회성) | 서버에 이미 데이터 있으면 스킵 |
 
+### 파트너 연동
+
+| 함수 | 설명 | 비고 |
+|------|------|------|
+| `register_partner_customer(p_partner_id)` | QR 스캔으로 파트너-사용자 연결 등록 | SECURITY DEFINER, 중복 시 무시, 파트너 정보 jsonb 반환 |
+
 ---
 
 ## Edge Functions (Deno)

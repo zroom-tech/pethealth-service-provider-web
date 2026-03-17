@@ -94,7 +94,8 @@ export async function signup(
     return { error: "비밀번호가 일치하지 않습니다." };
   }
 
-  if (!["hospital", "grooming", "hotel"].includes(category)) {
+  const validCategories = ["동물미용", "동물병원", "동물호텔", "용품판매점"];
+  if (!validCategories.includes(category)) {
     return { error: "올바른 업종을 선택해주세요." };
   }
 

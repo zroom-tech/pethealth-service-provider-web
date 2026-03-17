@@ -173,6 +173,8 @@
 | `user_mails` | 인앱 메일/알림 | 자기 데이터만 |
 | `deleted_accounts` | 계정 삭제 기록 | - |
 | `inquiry` | 문의 | 자기 데이터만 SELECT/INSERT |
+| `partners` | 서비스 제공자 (동물병원, 미용샵, 호텔) | service role만 접근 |
+| `partner_customers` | 파트너-사용자 연결 (QR 등록) | 자기 데이터만 SELECT, INSERT는 RPC만 |
 
 - RLS 사용자 ID: `public.current_user_id()` 함수 (auth.uid() → users.id BIGINT 변환)
 
