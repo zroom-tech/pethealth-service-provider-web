@@ -168,10 +168,26 @@ npm run start    # 프로덕션 서버 실행
 npm run lint     # ESLint 검사
 ```
 
+## Supabase 관리 (중앙화)
+
+**DB 마이그레이션은 `pethealth` 프로젝트에서 중앙 관리합니다. 이 프로젝트에는 마이그레이션 파일이 없습니다.**
+
+- 마이그레이션 생성/push: `pethealth/supabase/migrations/`에서 수행
+- 스키마 타입: `src/lib/database.types.ts` (자동 생성 파일, 직접 수정 금지)
+- 타입 재생성: `pethealth/`에서 `npx supabase gen types typescript --linked` 실행 후 복사
+
+### 관련 프로젝트
+
+| 프로젝트 | 역할 |
+|---------|------|
+| **pethealth** | Flutter 모바일 앱 + DB 마이그레이션 관리 |
+| **pethealth-partners** (현재) | 서비스 제공자 웹 |
+| **pethealth-admin** | 내부 운영 어드민 웹 + Edge Functions |
+
 ## 작업 시 주의사항
 
 - Shadcn/ui 컴포넌트 추가 시: `npx shadcn@latest add [component]`
 - 새 라우트 추가 시 `src/lib/constants.ts`의 네비게이션 아이템에도 추가
-- Supabase 스키마 변경 시 `database.types.ts` 재생성 필요
+- **DB 스키마 변경이 필요하면 `pethealth` 프로젝트에서 마이그레이션 생성 후 타입 재생성**
 - 이미지 URL은 `next.config.ts`의 `remotePatterns`에 Supabase 도메인 등록 필요
 - 서버 컴포넌트에서 직접 데이터 페칭, 클라이언트 컴포넌트는 인터랙션만 담당
